@@ -11,17 +11,22 @@ class carritoCompras(models.Model):
     descuento = models.FloatField(default=0)
     cantMinima = models.IntegerField(default=0)
     fecha = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return self.cliente +" / " +str(self.fecha)
     
-class producto(models.Model):
+class producto(models.Model):    
+    opciones = ('c', 'Cosmetica'),('a', 'Aseo'),('v', 'Veduras'),('l', 'Licores')
     nombre = models.CharField(max_length=100)
     precio = models.FloatField(default=0)
     stock = models.IntegerField(default=0)
     codBarra = models.CharField(max_length=20, primary_key=True)
-    categoria =models.CharField(max_length=10)
+    categoria =models.CharField(max_length=15, choices= opciones)    
+    def __str__(self):
+        return self.nombre    
     
 class item(models.Model):
-    carrito = models.ForeignKey(carritoCompras, on_delete= CASCADE) 
-    producto = models,ForeignKey(producto, on_delete= CASCADE)
-    cantidad = models,IntegerField(default=0)
+    carrito = models.ForeignKey(carritoCompras, on_delete= models.CASCADE) 
+    producto = models.ForeignKey(producto, on_delete= models.CASCADE)
+    cantidad = models.IntegerField(default=0)
     
 
