@@ -28,5 +28,6 @@ class item(models.Model):
     carrito = models.ForeignKey(carritoCompras, on_delete= models.CASCADE) 
     producto = models.ForeignKey(producto, on_delete= models.CASCADE)
     cantidad = models.IntegerField(default=0)
-    
-
+    def __str__(self):
+        return self.carrito__str__()
+      
